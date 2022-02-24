@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../services/userApiConfig";
+import { loginUser } from "../../services/api/userApiConfig";
 
 export const Login = () => {
   const defaultInput = {

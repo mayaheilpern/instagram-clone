@@ -20,7 +20,7 @@ export const updatePost = async (postid, data) => {
   return res.data
 }
 
-export const deletePost = async (data) => {
-  const res = await api.delete(`posts/${postid}`, { post: data })
+export const deletePost = async (postid) => {
+  const res = await api.delete(`posts/${postid}`)
   return res.data
 }

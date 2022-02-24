@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signupUser } from "../../services/userApiConfig";
+import { signupUser } from "../../services/api/userApiConfig";
 
 export const Register = () => {
   const defaultInput = {
