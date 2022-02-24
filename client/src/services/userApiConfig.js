@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const baseUrl = "http://localhost:3000/";
+import { api } from "./apiConfig";
 
 export const verifyUser = async () => {
   const token = localStorage.getItem('token')
@@ -13,81 +11,37 @@ export const verifyUser = async () => {
   }
 }
 
-export const login = (data) => 
-  axios({
-    method: 'post',
-    url: `${baseUrl}auth/login`,
-    data: {authentication: data}
-  })
-  .then((res) => {
-    localStorage.setItem('token', res.data.token)
-    api.defaults.headers.common.authorization = `Bearer ${res.data.token}`
-    return res.data.user
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+export const loginUser = async (data) => {
+  const res = await api.post('auth/login', {authentication: data})
+  localStorage.setItem('token', res.data.token)
+  api.defaults.headers.common.authorization = `Bearer ${res.data.token}`
+  return res.data.user
+}
 
-export const fetchAllUsers = () => 
-  axios({
-    url: `${baseUrl}users`,
-  })
-  .then((res) => {
-    return res.data
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+export const getAllUsers = async () => {
+  const res = await api.get('users')
+  return res.data
+}
 
-export const signup = (data) => 
-  axios({
-    method: 'post',
-    url: `${baseUrl}users`,
-    data: {user: data}
-  })
-  .then((res) => {
-    localStorage.setItem('token', res.data.token)
-    api.defaults.headers.common.authorization = `Bearer ${res.data.token}`
-    return res.data
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+export const signupUser = async (data) => {
+  const res = await api.post('users', {user: data})
+  localStorage.setItem('token', res.data.token)
+  api.defaults.headers.common.authorization = `Bearer ${res.data.token}`
+  return res.data
+}
 
-export const getOneUser = (userid) => 
-  axios({
-    url: `${baseUrl}users/${userid}`,
-  })
-  .then((res) => {
-    return res.data
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+export const getOneUser = async (userId) => {
+  const res = await api.get(`users/${userId}`)
+  return res.data
+}
 
-export const updateUser = (userid, data) => 
-  axios({
-    method: 'put',
-    url: `${baseUrl}users/${userid}`,
-    data: {user: data}
-  })
-  .then((res) => {
-    return res.data
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+export const updateUser = async (userId, data) => {
+  const res = await api.put(`users/${userId}`, {user: data})
+  return res.data
+}
 
-// export const deleteUser = (userid) => 
-//   axios({
-//     method: 'delete',
-//     url: `${baseUrl}users/${userid}`,
-//   })
-//   .then((res) => {
-//     return res.data
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//   })
-
+// export const deleteUser = async (userId) => {
+//   const res = await api.delete(`user/${userId}`)
+//   return res.data
+// }
 

@@ -4,15 +4,15 @@ import { verifyUser } from "./services/userApiConfig";
 import { Auth } from "./Screens/Auth";
 
 function App() {
-  const [cuurentUser, setCurrentUser] = useState(null);
+  // const [cuurentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    const getUser = async = () => {
-      const res = await verifyUser()
-      setCurrentUser(res)
-    }
-    getUser()
-  }, [])
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const res = await verifyUser()
+  //     setCurrentUser(res)
+  //   }
+  //   getUser()
+  // }, [])
 
   return (
     <div>
