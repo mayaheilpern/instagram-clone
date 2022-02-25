@@ -4,6 +4,7 @@ import { verifyUser } from "./services/api/userApiConfig";
 import { Auth } from "./Screens/Auth";
 import { Posts } from "./Screens/Posts";
 import { Acct } from "./Screens/Acct";
+import { Layout } from "./Screens/Layout";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({})
@@ -17,14 +18,14 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <Layout currentUser={currentUser}>
       <Routes>
         <Route path="/" element={<h1>Home Page</h1>} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/acct/:userid/*" element={<Acct currentUser={currentUser}/>} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 
