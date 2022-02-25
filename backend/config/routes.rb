@@ -5,13 +5,15 @@ Rails.application.routes.draw do
   get '/auth/verify', to: 'authentications#verify'
   
   get '/users/:user_id/posts', to: 'posts#get_user_posts'
-
+  get '/users/:user_id/drafts', to: 'posts#get_user_drafts'
+  
   get '/comments', to: 'comments#all_comments'
   
   resources :users
   resources :posts do
     resources :comments
   end
+  resources :drafts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
