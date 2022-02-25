@@ -2,6 +2,13 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show update destroy ]
   before_action :authorize_request, only: [:create, :update, :destroy]
 
+  #GET /commments
+  def all_comments
+    @comments = Comment.all
+
+    render json: @comments, include: :user
+  end
+  
   # GET /posts/:post_id/comments
   def index
     @post = Post.find(params[:post_id])

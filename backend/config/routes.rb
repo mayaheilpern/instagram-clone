@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  root 'comments#all_comments'
   
   post '/auth/login', to: 'authentications#login'
   get '/auth/verify', to: 'authentications#verify'
   
   get '/users/:user_id/posts', to: 'posts#get_user_posts'
+
+  get '/comments', to: 'comments#all_comments'
   
   resources :users
   resources :posts do

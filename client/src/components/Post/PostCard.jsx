@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
+import { allComments } from "../../services/api/commentsApiConfig";
 import { getAllPosts } from "../../services/api/postsApiConfig";
 import userAvatar from "../../services/images/userAvatar.png";
+import { Comments } from "./Comments";
 
 export const PostCard = () => {
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [toggle, setToggle] = useState(false);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const getPosts = async () => {
-      const res = await getAllPosts();
-      setPosts(res);
+      const post = await getAllPosts();
+      setPosts(post);
     };
     getPosts();
-  }, []);
+  }, [toggle]);
 
   return (
     <>
+      <button onClick={() => setToggle(!toggle)}>toggle</button>
       {posts.map((post) => {
         return (
           <div key={post.id} className="border-2 rounded-lg m-8">
@@ -44,7 +50,14 @@ export const PostCard = () => {
                     />
                   </svg>
                 </button>
-                <button>
+                <button
+                  onClick={async () => {
+                    const res = await allComments(post.id);
+                    const c = res.filter(({ post_id }) => post_id === post.id);
+                    setComments(c);
+                    setModal(true);
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -65,6 +78,7 @@ export const PostCard = () => {
           </div>
         );
       })}
+      {modal && <Comments setModal={setModal} comments={comments} />}
     </>
   );
 };
