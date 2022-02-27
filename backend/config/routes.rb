@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   
   get '/comments', to: 'comments#all_comments'
 
-  get 'users/:user_id/posts/:post_id/likes', to: 'post_likes#show'
-  post 'users/:user_id/posts/:post_id/likes', to: 'post_likes#create'
-  delete 'users/:user_id/posts/:post_id/likes/:like_id', to: 'post_likes#destroy'
+  get '/posts/:post_id/likes', to: 'post_likes#show'
+  post '/posts/:post_id/likes', to: 'post_likes#create'
+  delete '/posts/:post_id/likes/:like_id', to: 'post_likes#destroy'
   
   resources :users
   resources :posts do
