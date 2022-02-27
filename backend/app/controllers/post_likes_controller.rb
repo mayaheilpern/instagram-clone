@@ -1,5 +1,6 @@
 class PostLikesController < ApplicationController
   before_action :set_post
+  before_action :authorize_request
 
   def show
     @likes = Post.find(params[:post_id])
@@ -11,6 +12,8 @@ class PostLikesController < ApplicationController
     @like.user = @current_user
     @post = Post.find(params[:post_id])
     @like.post = @post
+    # @user = User.find(params[:user_id])
+    # @like.user = @user
 
     if @like.save
       render json: @like, status: :created
@@ -31,6 +34,6 @@ class PostLikesController < ApplicationController
   end
 
   def like_params
-    params.require(:post_like).permit(:user_id, :post_id)
+    params.require(:post_like).permit(:user_id, :post_id, :content)
   end
 end
