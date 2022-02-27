@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { NavTab } from "../components/NavTab";
 import { Tab } from "../components/Tab";
 import { Posts } from "../components/Acct/Posts";
@@ -37,6 +37,7 @@ export const Acct = ({ currentUser }) => {
         <h1>{user.username}</h1>
         <p>{user.message}</p>
       </div>
+      <Link to={`/acct/${userid}/edit`}>Edit Account</Link>
       <NavTab
         className="flex"
         tabs={tabs}
