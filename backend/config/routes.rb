@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get '/users/:user_id/drafts', to: 'posts#get_user_drafts'
   
   get '/comments', to: 'comments#all_comments'
+
+  get 'users/:user_id/posts/:post_id/likes', to: 'post_likes#show'
+  post 'users/:user_id/posts/:post_id/likes', to: 'post_likes#create'
+  delete 'users/:user_id/posts/:post_id/likes/:like_id', to: 'post_likes#destroy'
   
   resources :users
   resources :posts do
