@@ -23,7 +23,7 @@ export const Navbar = ({ currentUser }) => {
             />
           </svg>
         </Link>
-        <Link to="/" className="px-1.5">
+        <Link to="/post" className="px-1.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
