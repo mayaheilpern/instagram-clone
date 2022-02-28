@@ -3,12 +3,16 @@ import { allComments } from "../../services/api/commentsApiConfig";
 import { getAllPosts } from "../../services/api/postsApiConfig";
 import userAvatar from "../../services/images/userAvatar.png";
 import { Comments } from "./Comments";
+import { addlike, deleteLike } from "../../services/api/postLikeApiConfig";
 
 export const PostCard = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
-  const [toggle, setToggle] = useState(false);
   const [modal, setModal] = useState(false);
+  // const [like, setLike] = useState(false);
+  // const [liked, setLiked] = useState({});
+  const [toggle, setToggle] = useState(false);
+  // const [toggleLike, setToggleLike] = useState(false);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -18,9 +22,22 @@ export const PostCard = () => {
     getPosts();
   }, [toggle]);
 
+  // console.log(like);
+  // console.log(posts[0].post_likes);
+
+  // useEffect(() => {
+  //   const handleLike = async () => {
+  //     const res = await addlike(1);
+  //     console.log(res);
+  //     setLiked(res);
+  //     console.log(liked);
+  //   };
+  //   handleLike();
+  // }, [toggleLike]);
+
   return (
     <>
-      <button onClick={() => setToggle(!toggle)}>toggle</button>
+      <button onClick={() => setToggle(!toggle)}>Toggle</button>
       {posts.map((post) => {
         return (
           <div key={post.id} className="border-2 rounded-lg m-8">
@@ -34,7 +51,20 @@ export const PostCard = () => {
             <div className="flex justify-between">
               <p>{post.content}</p>
               <div>
-                <button>
+                <button
+                // onClick={async () => {
+                //   // const a = async () => {
+                //   if (like === false) {
+                //     const res = addlike(post.id);
+                //     // setLiked(res);
+                //     // console.log(liked);
+                //     console.log(res);
+                //   }
+                // };
+                // a();
+                // }}
+                // onClick={() => setToggleLike(!toggleLike)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -50,6 +80,7 @@ export const PostCard = () => {
                     />
                   </svg>
                 </button>
+                <p>{post.post_likes.length}</p>
                 <button
                   onClick={async () => {
                     const res = await allComments(post.id);
