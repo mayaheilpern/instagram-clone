@@ -7,7 +7,7 @@ export const Navbar = ({ currentUser }) => {
         Logo
       </Link>
       <div className="flex">
-        <Link to="/posts" className="px-1.5">
+        <Link to="/" className="px-1.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
