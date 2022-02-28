@@ -10,6 +10,7 @@ import { EditAcct } from "./Screens/EditAcct";
 import { Layout } from "./Screens/Layout";
 
 function App() {
+  const [toggle, setToggle] = useState(false);
   const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function App() {
       setCurrentUser(user)
     }
     getUser()
-  }, [])
+  }, [toggle])
 
   return (
     <Layout currentUser={currentUser}>
@@ -28,8 +29,8 @@ function App() {
         <Route path="/posts" element={<Posts />} />
         <Route path="/posts/:postid" element={<PostDetails currentUser={currentUser}/>} />
         <Route path="/post" element={<AddPost />} />
-        <Route path="/acct/:userid" element={<Acct currentUser={currentUser}/>} />
-        <Route path="/acct/:userid/edit" element={<EditAcct currentUser={currentUser}/>} />
+        <Route path="/acct/:userid" element={<Acct currentUser={currentUser} />} />
+        <Route path="/acct/:userid/edit" element={<EditAcct currentUser={currentUser} setToggle={setToggle}/>} />
       </Routes>
     </Layout>
   );
