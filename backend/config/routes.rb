@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/users/:user_id/drafts', to: 'posts#get_user_drafts'
   
   get '/comments', to: 'comments#all_comments'
-
+  
+  get '/likes', to: 'post_likes#index'
   get '/posts/:post_id/likes', to: 'post_likes#show'
   get '/users/:user_id/likes', to: 'post_likes#get_by_user'
   post '/posts/:post_id/likes', to: 'post_likes#create'

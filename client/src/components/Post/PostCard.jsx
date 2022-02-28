@@ -1,73 +1,74 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { allComments } from "../../services/api/commentsApiConfig";
 import { getAllPosts } from "../../services/api/postsApiConfig";
-import userAvatar from "../../services/images/userAvatar.png";
-import { Comments } from "./Comments";
-import { addlike, deleteLike } from "../../services/api/postLikeApiConfig";
+import { CommentsModal } from "./CommentsModal";
+import {
+  addlike,
+  deleteLike,
+  getAllLikes,
+} from "../../services/api/postLikeApiConfig";
 
-export const PostCard = () => {
+export const PostCard = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [modal, setModal] = useState(false);
-  // const [like, setLike] = useState(false);
-  // const [liked, setLiked] = useState({});
   const [toggle, setToggle] = useState(false);
-  // const [toggleLike, setToggleLike] = useState(false);
+  const [postLikes, setPostlikes] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
       const post = await getAllPosts();
       setPosts(post);
+      const likes = await getAllLikes();
+      setPostlikes(likes);
+      setToggle(false);
     };
     getPosts();
   }, [toggle]);
 
-  // console.log(like);
-  // console.log(posts[0].post_likes);
-
-  // useEffect(() => {
-  //   const handleLike = async () => {
-  //     const res = await addlike(1);
-  //     console.log(res);
-  //     setLiked(res);
-  //     console.log(liked);
-  //   };
-  //   handleLike();
-  // }, [toggleLike]);
-
+  // const liked = isLiked[0] && "fill-red-500 stroke-red-500";
   return (
     <>
       <button onClick={() => setToggle(!toggle)}>Toggle</button>
       {posts.map((post) => {
         return (
           <div key={post.id} className="border-2 rounded-lg m-8">
-            <div className="flex items-center">
-              <img src={userAvatar} alt="user avatar" className="w-9" />
+            <Link to={`/acct/${post.user.id}`} className="flex items-center">
+              <img src={post.user.avatar} alt="user avatar" className="w-9" />
               <h1 className="px-4 text-xl">{post.user.username}</h1>
-            </div>
+            </Link>
             <hr />
-            <img src={post.image_url} alt="post img" />
+            <Link to={`/${post.id}`}>
+              <img src={post.image_url} alt="post image" />
+            </Link>
             <hr />
             <div className="flex justify-between">
               <p>{post.content}</p>
               <div>
                 <button
-                // onClick={async () => {
-                //   // const a = async () => {
-                //   if (like === false) {
-                //     const res = addlike(post.id);
-                //     // setLiked(res);
-                //     // console.log(liked);
-                //     console.log(res);
-                //   }
-                // };
-                // a();
-                // }}
-                // onClick={() => setToggleLike(!toggleLike)}
+                  onClick={() => {
+                    const isLiked = postLikes.filter(
+                      ({ user_id, post_id }) =>
+                        user_id === currentUser.id && post_id === post.id
+                    );
+                    const like = async () => {
+                      if (isLiked.length === 0) {
+                        await addlike(post.id);
+                        console.log(`added to ${post.id}`);
+                        setToggle(true);
+                      } else {
+                        await deleteLike(post.id, isLiked[0].id);
+                        console.log(` deleted from ${post.id}`);
+                        setToggle(true);
+                      }
+                    };
+                    like();
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className={`h-6 w-6`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -109,7 +110,7 @@ export const PostCard = () => {
           </div>
         );
       })}
-      {modal && <Comments setModal={setModal} comments={comments} />}
+      {modal && <CommentsModal setModal={setModal} comments={comments} />}
     </>
   );
 };

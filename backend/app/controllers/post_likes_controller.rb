@@ -1,6 +1,11 @@
 class PostLikesController < ApplicationController
-  before_action :set_post, except: :get_by_user
+  before_action :set_post, except: [:get_by_user, :index]
   before_action :authorize_request
+
+  def index
+    @likes = PostLike.all 
+    render json: @likes
+  end
 
   def show
     @likes = Post.find(params[:post_id])

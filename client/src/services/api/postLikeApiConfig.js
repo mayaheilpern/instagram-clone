@@ -1,5 +1,10 @@
 import { api } from "./apiConfig";
 
+export const getAllLikes = async () => {
+  const res = await api.get(`likes`)
+  return res.data
+}
+
 export const getPostLikes = async (postid) => {
   const res = await api.get(`posts/${postid}/likes`)
   return res.data

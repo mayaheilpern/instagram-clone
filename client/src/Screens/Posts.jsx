@@ -1,11 +1,10 @@
 import React from "react";
 import { PostCard } from "../components/Post/PostCard";
 
-export const Posts = () => {
+export const Posts = ({ currentUser }) => {
   return (
     <>
-      <div>Posts</div>
-      <PostCard />
+      <PostCard currentUser={currentUser} />
     </>
   );
 };
