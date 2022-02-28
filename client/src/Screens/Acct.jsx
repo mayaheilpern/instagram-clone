@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import { NavTab } from "../components/NavTab";
 import { Tab } from "../components/Tab";
 import { Posts } from "../components/Acct/Posts";
-import { Comments } from "../components/Acct/Comments";
+import { Mentions } from "../components/Acct/Mentions";
 import { Likes } from "../components/Acct/Likes";
 import { Drafts } from "../components/Acct/Drafts";
 import { getByUser } from "../services/api/postsApiConfig";
 import { getOneUser } from "../services/api/userApiConfig";
 import userAvatar from "../services/images/userAvatar.png";
+import { PostDetails } from "./PostDetails";
 
 export const Acct = ({ currentUser }) => {
-  const tabs = ["Posts", "Comments", "Likes", "Drafts"];
+  const tabs = ["Posts", "Likes", "Mentions"];
   const { userid } = useParams();
 
   const [user, setUser] = useState({});
@@ -38,26 +39,21 @@ export const Acct = ({ currentUser }) => {
         <p>{user.message}</p>
       </div>
       <Link to={`/acct/${userid}/edit`}>Edit Account</Link>
-      <NavTab
-        className="flex"
-        tabs={tabs}
-        selected={selected}
-        setSelected={setSelected}
-      >
+      <NavTab tabs={tabs} selected={selected} setSelected={setSelected}>
         <Tab isSelected={selected === tabs[0]}>
           <Posts posts={posts} />
         </Tab>
         <Tab isSelected={selected === tabs[1]}>
-          <Comments />
+          <Likes userid={userid} />
         </Tab>
         <Tab isSelected={selected === tabs[2]}>
-          <Likes />
+          <Mentions />
         </Tab>
-        {currentUser?.id === user.id ? (
+        {/* {currentUser?.id === user.id ? (
           <Tab isSelected={selected === tabs[3]}>
-            <Drafts />
+          <Drafts />
           </Tab>
-        ) : null}
+        ) : null} */}
       </NavTab>
     </>
   );
