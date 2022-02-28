@@ -36,8 +36,8 @@ export const AddPost = () => {
           value={input.image_url}
           onChange={handleInput}
           className="
-            border-2 
-            rounded-lg 
+            border 
+            rounded-md
             my-4 
             pl-2
             py-1
@@ -53,7 +53,7 @@ export const AddPost = () => {
           placeholder="Content"
           value={input.content}
           onChange={handleInput}
-          className="border-2 rounded-lg my-4 pl-2 py-1 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+          className="border rounded-md my-4 pl-2 py-1 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
         />
         {input.image_url && (
           <img
