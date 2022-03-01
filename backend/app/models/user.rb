@@ -5,4 +5,8 @@ class User < ApplicationRecord
   has_many :post_likes, dependent: :destroy
   has_many :comment_likes, dependent: :destroy
   has_secure_password
+
+  validates :email, uniqueness: true
+  validates :username, uniqueness: true
+  validates :password, uniqueness: true
 end
