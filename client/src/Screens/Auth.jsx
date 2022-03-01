@@ -10,7 +10,7 @@ export const Auth = () => {
 
   return (
     <div className="w-screen h-screen">
-      <div className="border-2 mx-[10vw] my-[10vh]">
+      <div className="border-2 mx-[10vw] my-[10vh] py-5 rounded-xl shadow-xl xl:w-1/2 xl:mx-auto">
         <NavTab tabs={tabs} selected={selected} setSelected={setSelected}>
           <Tab isSelected={selected === tabs[0]}>
             <Register />
