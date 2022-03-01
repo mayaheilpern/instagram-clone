@@ -27,7 +27,7 @@ export const CommentsModal = ({ comments, setModal }) => {
         className="opacity-100 inset-0 absolute flex justify-center items-center overscroll-none"
         onClick={() => setModal(false)}
       ></div>
-      <div className="bg-white fixed inset-x-0 bottom-0 rounded-t-2xl h-3/6 overflow-y-auto md:fixed md:inset-y-0 md:inset-x-auto md:right-0 md:rounded-none md:h-auto md:w-[43vw] md:mt-20 md:border-l">
+      <div className="bg-white fixed inset-x-0 bottom-0 rounded-t-2xl h-3/6 overflow-y-auto md:fixed md:inset-y-0 md:inset-x-auto md:right-0 md:rounded-none md:h-auto md:w-[43vw] md:mt-20 md:border-l xl:w-[25vw]">
         <div className="flex justify-between">
           <div></div>
           <div className="text-center py-2">{count} comments</div>

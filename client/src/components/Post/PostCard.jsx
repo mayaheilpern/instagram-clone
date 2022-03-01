@@ -28,7 +28,7 @@ export const PostCard = ({ currentUser }) => {
   }, [toggle]);
 
   const layout = modal
-    ? "flex justify-start items-start flex-col"
+    ? "flex justify-start items-start flex-col xl:justify-center xl:items-center"
     : "flex justify-center items-center flex-col";
 
   return (

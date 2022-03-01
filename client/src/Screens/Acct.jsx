@@ -27,7 +27,7 @@ export const Acct = ({ currentUser }) => {
   }, [userid]);
 
   return (
-    <>
+    <div className="xl:w-[60vw] xl:flex xl:flex-col xl:justify-center xl:items-center xl:mx-auto">
       <div className="flex flex-col items-center m-3 mb-10">
         <img
           src={user.avatar}
@@ -57,6 +57,6 @@ export const Acct = ({ currentUser }) => {
           <Mentions />
         </Tab>
       </NavTab>
-    </>
+    </div>
   );
 };

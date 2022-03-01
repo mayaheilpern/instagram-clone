@@ -29,7 +29,7 @@ export const AddPost = ({ setPostModal }) => {
         className="opacity-50 inset-0 absolute flex justify-center items-center overscroll-none"
         onClick={() => setPostModal(false)}
       ></div>
-      <div className="rounded-xl border-2 bg-white fixed inset-y-1/4 inset-x-8 h-2/4 overflow-y-auto md:inset-x-16">
+      <div className="rounded-xl border-2 bg-white fixed inset-y-1/4 inset-x-8 h-2/4 overflow-y-auto md:inset-x-16 xl:inset-x-96">
         <div className="flex justify-between">
           <div></div>
           <div className="text-center py-2">Add Post</div>
