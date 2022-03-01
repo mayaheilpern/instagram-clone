@@ -23,7 +23,7 @@ export const Navbar = ({ currentUser }) => {
     <>
       <div className="bg-teal-500 flex justify-between py-6">
         <Link to="/" className="text-white text-xl px-5">
-          Logo
+          {/* Logo */}
         </Link>
         <div className="flex">
           <Link to="/" className="px-1.5 flex items-center">
