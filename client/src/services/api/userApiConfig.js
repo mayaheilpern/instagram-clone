@@ -40,8 +40,8 @@ export const updateUser = async (userId, data) => {
   return res.data
 }
 
-// export const deleteUser = async (userId) => {
-//   const res = await api.delete(`user/${userId}`)
-//   return res.data
-// }
+export const deleteUser = async (userId) => {
+  const res = await api.delete(`user/${userId}`)
+  return res.data
+}
 

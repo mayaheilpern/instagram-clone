@@ -27,12 +27,15 @@ export const PostCard = ({ currentUser }) => {
     getPosts();
   }, [toggle]);
 
-  // const liked = isLiked[0] && "fill-red-500 stroke-red-500";
+  const layout = modal
+    ? "flex justify-start items-start flex-col"
+    : "flex justify-center items-center flex-col";
+
   return (
-    <>
+    <div className={layout}>
       {posts.map((post) => {
         return (
-          <div key={post.id} className="border-2 rounded-lg m-8">
+          <div key={post.id} className="border-2 rounded-lg m-10 md:w-96">
             <Link
               to={`/acct/${post.user.id}`}
               className="flex items-center p-2"
@@ -42,7 +45,7 @@ export const PostCard = ({ currentUser }) => {
             </Link>
             <hr />
             <Link to={`/${post.id}`}>
-              <img src={post.image_url} alt="post image" />
+              <img src={post.image_url} alt="post" />
             </Link>
             <hr />
             <p className="p-2">{post.content}</p>
@@ -112,6 +115,6 @@ export const PostCard = ({ currentUser }) => {
         );
       })}
       {modal && <CommentsModal setModal={setModal} comments={comments} />}
-    </>
+    </div>
   );
 };

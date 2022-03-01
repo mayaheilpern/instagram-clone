@@ -11,10 +11,10 @@ export const Likes = ({ userid }) => {
       setLikes(res);
     };
     getLikes();
-  }, []);
+  }, [userid]);
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-start md:mx-16">
       {likes.map((like) => {
         return (
           <div key={like.id}>

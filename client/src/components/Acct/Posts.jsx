@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const Posts = ({ posts }) => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-start md:mx-16">
       {posts.map((post) => {
         return (
           <div key={post.id}>

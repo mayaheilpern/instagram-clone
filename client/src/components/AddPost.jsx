@@ -29,7 +29,7 @@ export const AddPost = ({ setPostModal }) => {
         className="opacity-50 inset-0 absolute flex justify-center items-center overscroll-none"
         onClick={() => setPostModal(false)}
       ></div>
-      <div className="rounded-xl border-2 bg-white fixed inset-y-1/4 inset-x-8 h-2/4 overflow-y-auto">
+      <div className="rounded-xl border-2 bg-white fixed inset-y-1/4 inset-x-8 h-2/4 overflow-y-auto md:inset-x-16">
         <div className="flex justify-between">
           <div></div>
           <div className="text-center py-2">Add Post</div>
@@ -82,7 +82,7 @@ export const AddPost = ({ setPostModal }) => {
           {input.image_url && (
             <img
               src={input.image_url}
-              alt="image preview"
+              alt="preview"
               className="w-full h-auto"
               onError={(e) =>
                 (e.target.src =

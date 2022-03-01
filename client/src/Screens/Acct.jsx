@@ -24,7 +24,7 @@ export const Acct = ({ currentUser }) => {
       setPosts(resp);
     };
     getUser();
-  }, []);
+  }, [userid]);
 
   return (
     <>
@@ -44,7 +44,7 @@ export const Acct = ({ currentUser }) => {
             <Link to={`/acct/${userid}/edit`}>&nbsp;- Edit Account</Link>
           )}
         </div>
-        <p className="text-sm text-center">{user.message}</p>
+        <p className="text-sm text-center md:w-96">{user.message}</p>
       </div>
       <NavTab tabs={tabs} selected={selected} setSelected={setSelected}>
         <Tab isSelected={selected === tabs[0]}>
