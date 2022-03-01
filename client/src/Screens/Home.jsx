@@ -26,8 +26,14 @@ export const Home = () => {
       <Layout currentUser={currentUser}>
         <Routes>
           <Route path="/" element={<Posts currentUser={currentUser} />} />
+          <Route exact element={<PrivateRoute />}>
+            <Route
+              path="/acct/:userid"
+              element={<Acct currentUser={currentUser} />}
+            />
+          </Route>
           <Route
-            path="/acct/:userid"
+            path="/acct/:username"
             element={<Acct currentUser={currentUser} />}
           />
           <Route

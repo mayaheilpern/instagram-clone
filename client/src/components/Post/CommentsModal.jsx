@@ -72,7 +72,7 @@ export const CommentsModal = ({ comments, setModal, currentUser }) => {
             return (
               <div key={comment.id}>
                 <Link
-                  to={`/acct/${comment.user.id}`}
+                  to={`/acct/${comment.user.username}`}
                   className="flex items-center mt-2"
                 >
                   <img

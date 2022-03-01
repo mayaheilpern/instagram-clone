@@ -45,7 +45,7 @@ export const Comments = ({ comments, postid, setToggle, currentUser }) => {
       {comments.map((comment) => {
         return (
           <div key={comment.id}>
-            <Link to={`/acct/${comment.user.id}`}>
+            <Link to={`/acct/${comment.user.username}`}>
               <div className="flex items-center p-2 mt-2">
                 <img
                   src={comment.user.avatar}
