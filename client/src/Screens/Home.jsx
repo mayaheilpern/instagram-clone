@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { verifyUser } from "../services/api/userApiConfig";
 import { Posts } from "./Posts";
 import { PostDetails } from "./PostDetails";
-import { AddPost } from "./AddPost";
+import { AddPost } from "../components/AddPost";
 import { Acct } from "./Acct";
 import { EditAcct } from "./EditAcct";
 import { Layout } from "./Layout";
