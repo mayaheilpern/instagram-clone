@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createComment } from "../../services/api/commentsApiConfig";
 
-export const Comments = ({ comments, postid, setToggle }) => {
+export const Comments = ({ comments, postid, setToggle, currentUser }) => {
   const defaultInput = { content: "" };
+  const navigate = useNavigate();
 
   const [input, setInput] = useState(defaultInput);
 
@@ -17,9 +18,13 @@ export const Comments = ({ comments, postid, setToggle }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createComment(postid, input);
-    setInput(defaultInput);
-    setToggle((prevToggle) => !prevToggle);
+    if (currentUser.id) {
+      await createComment(postid, input);
+      setInput(defaultInput);
+      setToggle((prevToggle) => !prevToggle);
+    } else {
+      navigate("/auth");
+    }
   };
 
   return (

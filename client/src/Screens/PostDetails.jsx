@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Comments } from "../components/PostDetails/Comments";
 import { getOnePost } from "../services/api/postsApiConfig";
 import { getAllComments } from "../services/api/commentsApiConfig";
@@ -16,6 +16,7 @@ export const PostDetails = ({ currentUser }) => {
   const [comments, setComments] = useState([]);
   const [toggleComments, setToggleComments] = useState(false);
   const { postid } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPost = async () => {
@@ -32,12 +33,16 @@ export const PostDetails = ({ currentUser }) => {
 
   const handleLike = async (e) => {
     e.preventDefault();
-    if (isLiked.length === 0) {
-      await addlike(postid);
-      setToggle((prevToggle) => !prevToggle);
+    if (currentUser.id) {
+      if (isLiked.length === 0) {
+        await addlike(postid);
+        setToggle((prevToggle) => !prevToggle);
+      } else {
+        await deleteLike(postid, isLiked[0].id);
+        setToggle((prevToggle) => !prevToggle);
+      }
     } else {
-      await deleteLike(postid, isLiked[0].id);
-      setToggle((prevToggle) => !prevToggle);
+      navigate("/auth");
     }
   };
 
@@ -97,7 +102,12 @@ export const PostDetails = ({ currentUser }) => {
         </div>
       </div>
       {toggleComments && (
-        <Comments comments={comments} postid={postid} setToggle={setToggle} />
+        <Comments
+          comments={comments}
+          postid={postid}
+          setToggle={setToggle}
+          currentUser={currentUser}
+        />
       )}
     </div>
   );

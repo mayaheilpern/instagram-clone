@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { allComments } from "../../services/api/commentsApiConfig";
 import { getAllPosts } from "../../services/api/postsApiConfig";
 import { CommentsModal } from "./CommentsModal";
@@ -15,6 +15,7 @@ export const PostCard = ({ currentUser }) => {
   const [modal, setModal] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [postLikes, setPostlikes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPosts = async () => {
@@ -52,20 +53,24 @@ export const PostCard = ({ currentUser }) => {
             <div className="p-3 flex flex-row">
               <button
                 onClick={() => {
-                  const isLiked = postLikes.filter(
-                    ({ user_id, post_id }) =>
-                      user_id === currentUser.id && post_id === post.id
-                  );
-                  const like = async () => {
-                    if (isLiked.length === 0) {
-                      await addlike(post.id);
-                      setToggle(true);
-                    } else {
-                      await deleteLike(post.id, isLiked[0].id);
-                      setToggle(true);
-                    }
-                  };
-                  like();
+                  if (currentUser.id) {
+                    const isLiked = postLikes.filter(
+                      ({ user_id, post_id }) =>
+                        user_id === currentUser.id && post_id === post.id
+                    );
+                    const like = async () => {
+                      if (isLiked.length === 0) {
+                        await addlike(post.id);
+                        setToggle(true);
+                      } else {
+                        await deleteLike(post.id, isLiked[0].id);
+                        setToggle(true);
+                      }
+                    };
+                    like();
+                  } else {
+                    navigate("/auth");
+                  }
                 }}
                 className="flex flex-row"
               >
@@ -114,7 +119,13 @@ export const PostCard = ({ currentUser }) => {
           </div>
         );
       })}
-      {modal && <CommentsModal setModal={setModal} comments={comments} />}
+      {modal && (
+        <CommentsModal
+          setModal={setModal}
+          comments={comments}
+          currentUser={currentUser}
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createComment } from "../../services/api/commentsApiConfig";
 
-export const CommentsModal = ({ comments, setModal }) => {
+export const CommentsModal = ({ comments, setModal, currentUser }) => {
   const count = comments.length;
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({ content: "" });
 
@@ -17,8 +18,12 @@ export const CommentsModal = ({ comments, setModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createComment(comments[0].post_id, input);
-    setInput({ content: "" });
+    if (currentUser.id) {
+      await createComment(comments[0].post_id, input);
+      setInput({ content: "" });
+    } else {
+      navigate("/auth");
+    }
   };
 
   return (

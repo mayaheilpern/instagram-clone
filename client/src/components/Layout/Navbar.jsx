@@ -11,6 +11,14 @@ export const Navbar = ({ currentUser }) => {
     window.location.reload();
   };
 
+  const handleClick = () => {
+    if (currentUser.id) {
+      setPostModal(!postModal);
+    } else {
+      navigate("/auth");
+    }
+  };
+
   return (
     <>
       <div className="bg-teal-500 flex justify-between py-6">
@@ -37,10 +45,7 @@ export const Navbar = ({ currentUser }) => {
               <p className="text-white px-2">Home</p>
             )}
           </Link>
-          <button
-            onClick={() => setPostModal(!postModal)}
-            className="px-1.5 flex items-center"
-          >
+          <button onClick={handleClick} className="px-1.5 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8"
