@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createComment } from "../../services/api/commentsApiConfig";
+import {
+  getAllCommentLikes,
+  addCommentLike,
+  deleteCommentLike,
+} from "../../services/api/commentLikeApiConfig";
 
-export const CommentsModal = ({ comments, setModal, currentUser }) => {
-  const count = comments.length;
+export const CommentsModal = (props) => {
+  const count = props.comments.length;
   const navigate = useNavigate();
 
   const [input, setInput] = useState({ content: "" });
+  const [commentLikes, setCommentLikes] = useState([]);
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    const getLikes = async () => {
+      const res = await getAllCommentLikes();
+      setCommentLikes(res);
+      setToggle(false);
+    };
+    getLikes();
+  }, [toggle]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -18,8 +34,8 @@ export const CommentsModal = ({ comments, setModal, currentUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentUser.id) {
-      await createComment(comments[0].post_id, input);
+    if (props.currentUser.id) {
+      await createComment(props.comments[0].post_id, input);
       setInput({ content: "" });
     } else {
       navigate("/auth");
@@ -30,13 +46,13 @@ export const CommentsModal = ({ comments, setModal, currentUser }) => {
     <>
       <div
         className="opacity-100 inset-0 absolute flex justify-center items-center overscroll-none"
-        onClick={() => setModal(false)}
+        onClick={() => props.setModal(false)}
       ></div>
       <div className="bg-white fixed inset-x-0 bottom-0 rounded-t-2xl h-3/6 overflow-y-auto md:fixed md:inset-y-0 md:inset-x-auto md:right-0 md:rounded-none md:h-auto md:w-[43vw] md:mt-20 md:border-l xl:w-[25vw]">
         <div className="flex justify-between">
           <div></div>
           <div className="text-center py-2">{count} comments</div>
-          <button onClick={() => setModal(false)}>
+          <button onClick={() => props.setModal(false)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 mt-2 mr-2"
@@ -68,7 +84,7 @@ export const CommentsModal = ({ comments, setModal, currentUser }) => {
           </button>
         </form>
         <div className="flex flex-col justify-between">
-          {comments.map((comment) => {
+          {props.comments.map((comment) => {
             return (
               <div key={comment.id}>
                 <Link
@@ -82,7 +98,60 @@ export const CommentsModal = ({ comments, setModal, currentUser }) => {
                   />
                   <h2 className="px-3">{comment.user.username}</h2>
                 </Link>
-                <p className="mx-2">{comment.content}</p>
+                <p className="mx-2">
+                  {comment.content}
+                  {comment.id}
+                </p>
+                <button
+                  onClick={() => {
+                    if (props.currentUser.id) {
+                      const isLiked = commentLikes.filter(
+                        ({ user_id, comment_id }) =>
+                          user_id === props.currentUser.id &&
+                          comment_id === comment.id
+                      );
+                      const like = async () => {
+                        if (isLiked.length === 0) {
+                          const res = await addCommentLike(comment.id);
+                          console.log(res);
+                          console.log(`added to ${comment.id}`);
+                          setToggle(true);
+                        } else {
+                          await deleteCommentLike(comment.id, isLiked[0].id);
+                          console.log(`deleted from ${comment.id}`);
+                          setToggle(true);
+                        }
+                      };
+                      like();
+                    } else {
+                      navigate("/auth");
+                    }
+                  }}
+                  className="flex flex-row"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                  <p className="pl-2">
+                    {
+                      commentLikes.filter(
+                        ({ comment_id }) => comment_id === comment.id
+                      ).length
+                    }
+                    &nbsp;Likes
+                  </p>
+                </button>
               </div>
             );
           })}
