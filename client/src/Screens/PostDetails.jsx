@@ -26,7 +26,7 @@ export const PostDetails = ({ currentUser }) => {
       setPostlikes(likes);
     };
     getPost();
-  }, [toggle]);
+  }, [toggle, postid]);
 
   const isLiked = postLikes.filter(({ user_id }) => user_id === currentUser.id);
   const liked = isLiked[0] && "fill-red-500 stroke-red-500";
