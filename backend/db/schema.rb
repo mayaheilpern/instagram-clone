@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_27_025510) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_01_191624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comment_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "content"
+    t.index ["comment_id"], name: "index_comment_likes_on_comment_id"
+    t.index ["user_id"], name: "index_comment_likes_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
@@ -64,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_27_025510) do
     t.text "avatar"
   end
 
+  add_foreign_key "comment_likes", "comments"
+  add_foreign_key "comment_likes", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "drafts", "users"

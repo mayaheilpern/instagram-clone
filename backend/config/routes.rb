@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   get '/users/:user_id/likes', to: 'post_likes#get_by_user'
   post '/posts/:post_id/likes', to: 'post_likes#create'
   delete '/posts/:post_id/likes/:like_id', to: 'post_likes#destroy'
+
+  get '/comment_likes', to: 'comment_likes#index'
+  get '/comments/:comment_id/comment_likes', to: 'comment_likes#show'
+  get '/users/:user_id/comment_likes', to: 'comment_likes#get_by_user'
+  post '/comments/:comment_id/comment_likes', to: 'comment_likes#create'
+  delete '/comments/:comment_id/comment_likes/:like_id', to: 'comment_likes#destroy'
   
   resources :users
   resources :posts do

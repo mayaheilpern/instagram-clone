@@ -1,5 +1,5 @@
 class PostLikesController < ApplicationController
-  before_action :set_post, except: [:get_by_user, :index]
+  before_action :set_post, except: [:get_by_user, :index, :show]
   before_action :authorize_request
 
   def index

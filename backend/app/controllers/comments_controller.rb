@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def all_comments
     @comments = Comment.all
 
-    render json: @comments, include: :user
+    render json: @comments, include: [:user, :comment_likes]
   end
   
   # GET /posts/:post_id/comments
