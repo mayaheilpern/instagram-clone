@@ -6,7 +6,7 @@ export const Posts = ({ posts }) => {
       {posts.map((post) => {
         return (
           <div key={post.id}>
-            <Link to={`/posts/${post.id}`}>
+            <Link to={`/${post.id}`}>
               <img
                 src={post.image_url}
                 alt={`posts number ${post.id}`}

@@ -20,7 +20,7 @@ export const Likes = ({ userid }) => {
       {likes.map((like) => {
         return (
           <div key={like.id}>
-            <Link to={`/posts/${like.post.id}`}>
+            <Link to={`/${like.post.id}`}>
               <img
                 src={like.post.image_url}
                 alt={`img for post ${like.post.id}`}

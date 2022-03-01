@@ -18,18 +18,20 @@ export const Comments = ({ comments, postid, setToggle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createComment(postid, input);
+    setInput(defaultInput);
     setToggle((prevToggle) => !prevToggle);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="mx-2">
+      <form onSubmit={handleSubmit} className="mx-2 flex justify-between">
         <input
+          required
           name="content"
           placeholder="Add Comment..."
           value={input.content}
           onChange={handleInput}
-          className="p-1 border-2 rounded-md focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+          className="px-2 py-1 mb-3 mt-2 border-b focus:outline-none focus:border-teal-500"
         />
         <button className="bg-teal-500 rounded-lg px-5 py-1 mb-3 mt-2 text-white">
           Add
