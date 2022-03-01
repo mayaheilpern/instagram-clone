@@ -10,7 +10,7 @@ export const Posts = ({ posts }) => {
               <img
                 src={post.image_url}
                 alt={`posts number ${post.id}`}
-                className="w-20 h-20 m-1"
+                className="w-20 h-20 m-1 rounded-lg"
               />
             </Link>
           </div>

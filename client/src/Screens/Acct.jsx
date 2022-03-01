@@ -28,22 +28,24 @@ export const Acct = ({ currentUser }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center m-3 mb-10">
         <img
           src={user.avatar}
           alt="user profile img"
-          className="w-10"
+          className="w-14"
           onError={(e) => {
             e.target.src =
               "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw";
           }}
         />
-        <h1>{user.username}</h1>
-        <p>{user.message}</p>
+        <div className="flex items-center py-2">
+          <h1 className="text-xl">{user.username}</h1>
+          {currentUser.id === user.id && (
+            <Link to={`/acct/${userid}/edit`}>&nbsp;- Edit Account</Link>
+          )}
+        </div>
+        <p className="text-sm text-center">{user.message}</p>
       </div>
-      {currentUser.id === user.id && (
-        <Link to={`/acct/${userid}/edit`}>Edit Account</Link>
-      )}
       <NavTab tabs={tabs} selected={selected} setSelected={setSelected}>
         <Tab isSelected={selected === tabs[0]}>
           <Posts posts={posts} />

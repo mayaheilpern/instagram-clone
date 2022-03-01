@@ -13,8 +13,6 @@ export const Likes = ({ userid }) => {
     getLikes();
   }, []);
 
-  console.log(likes);
-
   return (
     <div className="flex flex-wrap justify-center">
       {likes.map((like) => {
@@ -24,7 +22,7 @@ export const Likes = ({ userid }) => {
               <img
                 src={like.post.image_url}
                 alt={`img for post ${like.post.id}`}
-                className="w-20 h-20 m-1"
+                className="w-20 h-20 m-1 rounded-lg"
               />
             </Link>
           </div>
