@@ -25,24 +25,15 @@ export const Home = () => {
     <>
       <Layout currentUser={currentUser}>
         <Routes>
-          <Route exact element={<PrivateRoute />}>
-            <Route path="/" element={<Posts currentUser={currentUser} />} />
-          </Route>
-          <Route exact element={<PrivateRoute />}>
-            <Route path="/post" element={<AddPost />} />
-          </Route>
-          <Route exact element={<PrivateRoute />}>
-            <Route
-              path="/acct/:userid"
-              element={<Acct currentUser={currentUser} />}
-            />
-          </Route>
-          <Route exact element={<PrivateRoute />}>
-            <Route
-              path="/:postid"
-              element={<PostDetails currentUser={currentUser} />}
-            />
-          </Route>
+          <Route path="/" element={<Posts currentUser={currentUser} />} />
+          <Route
+            path="/acct/:userid"
+            element={<Acct currentUser={currentUser} />}
+          />
+          <Route
+            path="/:postid"
+            element={<PostDetails currentUser={currentUser} />}
+          />
           <Route exact element={<PrivateRoute />}>
             <Route
               path="/acct/:userid/edit"
