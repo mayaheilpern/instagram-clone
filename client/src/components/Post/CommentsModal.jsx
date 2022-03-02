@@ -91,11 +91,23 @@ export const CommentsModal = (props) => {
                   to={`/acct/${comment.user.username}`}
                   className="flex items-center mt-2"
                 >
-                  <img
-                    src={comment.user.avatar}
-                    alt="user avatar"
-                    className="w-5 h-5 ml-2"
-                  />
+                  {comment.user.avatar === null ? (
+                    <img
+                      src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
+                      alt="user profile img"
+                      className="w-14"
+                    />
+                  ) : (
+                    <img
+                      src={comment.user.avatar}
+                      alt="user profile img"
+                      className="w-14"
+                      onError={(e) =>
+                        (e.target.src =
+                          "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
+                      }
+                    />
+                  )}
                   <h2 className="px-3">{comment.user.username}</h2>
                 </Link>
                 <p className="mx-2">

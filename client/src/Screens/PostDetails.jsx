@@ -56,7 +56,23 @@ export const PostDetails = ({ currentUser }) => {
     <div className="rounded-xl shadow-xl border-2 mx-[10vw] my-[5vh]">
       <Link to={`/acct/${post.user?.username}`}>
         <div className="flex items-center p-3">
-          <img src={post.user?.avatar} alt="user avatar" className="w-9" />
+          {post.user?.avatar === null ? (
+            <img
+              src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
+              alt="user profile img"
+              className="w-14"
+            />
+          ) : (
+            <img
+              src={post.user?.avatar}
+              alt="user profile img"
+              className="w-14"
+              onError={(e) =>
+                (e.target.src =
+                  "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
+              }
+            />
+          )}
           <h1 className="px-4 text-xl">{post.user?.username}</h1>
         </div>
       </Link>

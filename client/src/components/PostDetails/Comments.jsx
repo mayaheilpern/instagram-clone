@@ -47,11 +47,23 @@ export const Comments = ({ comments, postid, setToggle, currentUser }) => {
           <div key={comment.id}>
             <Link to={`/acct/${comment.user.username}`}>
               <div className="flex items-center p-2 mt-2">
-                <img
-                  src={comment.user.avatar}
-                  alt="user avatar"
-                  className="w-6 h-6"
-                />
+                {comment.user.avatar === null ? (
+                  <img
+                    src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
+                    alt="user profile img"
+                    className="w-14"
+                  />
+                ) : (
+                  <img
+                    src={comment.user.avatar}
+                    alt="user profile img"
+                    className="w-14"
+                    onError={(e) =>
+                      (e.target.src =
+                        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
+                    }
+                  />
+                )}
                 <p className="px-3">{comment.user.username}</p>
               </div>
             </Link>

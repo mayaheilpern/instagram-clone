@@ -41,7 +41,23 @@ export const PostCard = ({ currentUser }) => {
               to={`/acct/${post.user.username}`}
               className="flex items-center p-2"
             >
-              <img src={post.user.avatar} alt="user avatar" className="w-9" />
+              {post.user.avatar === null ? (
+                <img
+                  src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
+                  alt="user profile img"
+                  className="w-14"
+                />
+              ) : (
+                <img
+                  src={post.user.avatar}
+                  alt="user profile img"
+                  className="w-14"
+                  onError={(e) =>
+                    (e.target.src =
+                      "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
+                  }
+                />
+              )}
               <h1 className="px-4 text-xl">{post.user.username}</h1>
             </Link>
             <hr />
