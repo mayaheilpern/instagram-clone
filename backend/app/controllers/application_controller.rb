@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
       @payload = decode(token)
       @current_user = User.find(@payload[:id])
     rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e.message }, status: :unauthorized
+      render json: { errors: e.message }, status: :bad_request
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
