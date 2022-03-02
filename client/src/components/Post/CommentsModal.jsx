@@ -37,6 +37,7 @@ export const CommentsModal = (props) => {
     if (props.currentUser.id) {
       await createComment(props.comments[0].post_id, input);
       setInput({ content: "" });
+      setToggle(!toggle);
     } else {
       navigate("/auth");
     }
@@ -88,20 +89,20 @@ export const CommentsModal = (props) => {
             return (
               <div key={comment.id}>
                 <Link
-                  to={`/acct/${comment.user.id}`}
+                  to={`/acct/${comment.user?.id}`}
                   className="flex items-center mt-2"
                 >
                   {comment.user.avatar === null ? (
                     <img
                       src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
                       alt="user profile img"
-                      className="w-14"
+                      className="w-8"
                     />
                   ) : (
                     <img
                       src={comment.user.avatar}
                       alt="user profile img"
-                      className="w-14"
+                      className="w-8"
                       onError={(e) =>
                         (e.target.src =
                           "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
