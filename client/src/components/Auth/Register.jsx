@@ -75,7 +75,7 @@ export const Register = () => {
             onChange={handleInput}
             className="border rounded-md my-2 mr-2 ml-10 border-black px-1 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 md:w-full"
           />
-          {showPass ? (
+          {/* {showPass ? (
             <button onClick={() => setShowPass(false)} type="button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export const Register = () => {
                 />
               </svg>
             </button>
-          )}
+          )} */}
         </div>
         <button
           type="submit"
