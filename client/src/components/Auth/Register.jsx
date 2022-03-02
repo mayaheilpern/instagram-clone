@@ -12,7 +12,7 @@ export const Register = () => {
   };
 
   const [input, setInput] = useState(defaultInput);
-  const [showPass, setShowPass] = useState(false);
+  // const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -30,7 +30,7 @@ export const Register = () => {
     navigate("/");
   };
 
-  const showPassword = showPass ? "text" : "password";
+  // const showPassword = showPass ? "text" : "password";
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
@@ -69,7 +69,7 @@ export const Register = () => {
           <input
             required
             name="password"
-            type={showPassword}
+            type="password"
             placeholder="password"
             value={input.password}
             onChange={handleInput}
