@@ -31,10 +31,10 @@ export const Home = () => {
               element={<Acct currentUser={currentUser} />}
             />
           </Route>
-          <Route
+          {/* <Route
             path="/acct/:username"
             element={<Acct currentUser={currentUser} />}
-          />
+          /> */}
           <Route
             path="/:postid"
             element={<PostDetails currentUser={currentUser} />}

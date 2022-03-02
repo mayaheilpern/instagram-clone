@@ -54,7 +54,7 @@ export const PostDetails = ({ currentUser }) => {
 
   return (
     <div className="rounded-xl shadow-xl border-2 mx-[10vw] my-[5vh]">
-      <Link to={`/acct/${post.user?.username}`}>
+      <Link to={`/acct/${post.user?.id}`}>
         <div className="flex items-center p-3">
           {post.user?.avatar === null ? (
             <img

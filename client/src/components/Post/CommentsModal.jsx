@@ -88,7 +88,7 @@ export const CommentsModal = (props) => {
             return (
               <div key={comment.id}>
                 <Link
-                  to={`/acct/${comment.user.username}`}
+                  to={`/acct/${comment.user.id}`}
                   className="flex items-center mt-2"
                 >
                   {comment.user.avatar === null ? (

@@ -38,7 +38,7 @@ export const PostCard = ({ currentUser }) => {
         return (
           <div key={post.id} className="border-2 rounded-lg m-10 md:w-96">
             <Link
-              to={`/acct/${post.user.username}`}
+              to={`/acct/${post.user.id}`}
               className="flex items-center p-2"
             >
               {post.user.avatar === null ? (
