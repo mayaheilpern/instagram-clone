@@ -29,15 +29,23 @@ export const Acct = ({ currentUser }) => {
   return (
     <div className="xl:w-[60vw] xl:flex xl:flex-col xl:justify-center xl:items-center xl:mx-auto">
       <div className="flex flex-col items-center m-3 mb-10">
-        <img
-          src={user.avatar}
-          alt="user profile img"
-          className="w-14"
-          onError={(e) => {
-            e.target.src =
-              "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw";
-          }}
-        />
+        {user.avatar === null ? (
+          <img
+            src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw"
+            alt="user profile img"
+            className="w-14"
+          />
+        ) : (
+          <img
+            src={user.avatar}
+            alt="user profile img"
+            className="w-14"
+            onError={(e) =>
+              (e.target.src =
+                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTBJlhH4ljFf4zwPw6qDY1vOBTVnkEdg3jMw44-OhLq2AazLtw")
+            }
+          />
+        )}
         <div className="flex items-center py-2">
           <h1 className="text-xl">{user.username}</h1>
           {currentUser.id === user.id && (
