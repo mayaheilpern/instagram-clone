@@ -21,6 +21,7 @@ export const AddPost = ({ setPostModal }) => {
     e.preventDefault();
     await createPost(input);
     setPostModal(false);
+    window.location.reload();
   };
 
   return (
