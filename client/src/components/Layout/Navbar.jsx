@@ -64,7 +64,7 @@ export const Navbar = ({ currentUser }) => {
               <p className="text-white px-2">Add Post</p>
             )}
           </button>
-          <Link to="/" className="px-1.5 flex items-center">
+          {/* <Link to="/" className="px-1.5 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8"
@@ -82,7 +82,7 @@ export const Navbar = ({ currentUser }) => {
             {window.innerWidth >= 768 && (
               <p className="text-white px-2">Notifications</p>
             )}
-          </Link>
+          </Link> */}
           {currentUser.id && (
             <Link
               to={`/acct/${currentUser.id}`}
