@@ -6,7 +6,7 @@ export const Register = () => {
   const defaultInput = {
     username: "",
     email: "",
-    password: "",
+    password_digest: "",
     name: "",
     message: "",
   };
