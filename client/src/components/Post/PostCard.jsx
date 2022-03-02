@@ -62,7 +62,7 @@ export const PostCard = ({ currentUser }) => {
             </Link>
             <hr />
             <Link to={`/${post.id}`}>
-              <img src={post.image_url} alt="post" />
+              <img src={post.image_url} alt="post" className="w-full h-auto" />
             </Link>
             <hr />
             <p className="p-2">{post.content}</p>
